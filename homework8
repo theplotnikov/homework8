@@ -1,0 +1,46 @@
+---
+- name: build java war
+  hosts: build
+  become: yes
+
+  tasks:
+    - name: ensure maven is present
+      apt:
+        name: maven
+        state: present
+
+    - name: ensure git is present
+      apt:
+        name: git
+        state: present
+
+    - name: clone boxfuse git repository
+      shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
+
+    - name: build the project
+      shell: mvn -f boxfuse-sample-java-war-hello/pom.xml package
+
+    - name: fetch war to server
+      fetch:
+        src: /root/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        dest: /tmp/
+
+- name: run war in prod
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: ensure tomcat is present
+      apt:
+        name: tomcat
+        state: present
+
+    - name: ensure tomcat is started
+      service:
+        name: tomcat
+        state: started
+
+    - name: copy war to prod
+      copy:
+        src: /tmp/hello-1.0.war
+        dest: /var/lib/tomcat/webapps/
