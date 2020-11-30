@@ -23,7 +23,7 @@
     - name: fetch war to server
       fetch:
         src: /root/boxfuse-sample-java-war-hello/target/hello-1.0.war
-        dest: /tmp/
+        dest: /tmp
 
 - name: run war in prod
   hosts: prod
