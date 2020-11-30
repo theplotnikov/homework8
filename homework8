@@ -32,12 +32,12 @@
   tasks:
     - name: ensure tomcat is present
       apt:
-        name: tomcat
+        name: tomcat9
         state: present
 
     - name: ensure tomcat is started
       service:
-        name: tomcat
+        name: tomcat9
         state: started
 
     - name: copy war to prod
