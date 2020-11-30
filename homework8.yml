@@ -18,7 +18,7 @@
       git:
         repo: 'https://github.com/theplotnikov/homework8.git'
         dest: /root/
-        clone: yes
+        clone: no
 
     - name: build the project
       shell: mvn -f boxfuse-sample-java-war-hello/pom.xml package
