@@ -24,6 +24,7 @@
       fetch:
         src: /root/boxfuse-sample-java-war-hello/target/hello-1.0.war
         dest: /tmp
+        flat: yes
 
 - name: run war in prod
   hosts: prod
